@@ -1,0 +1,59 @@
+date -d "1 day ago" '+%Y-%m-%d'
+
+
+ls -ltr | date -d "1 day ago" '+%d-%m-%Y' > /tmp/list.txt
+
+
+
+#!/bin/bash
+##Variables###
+#XML_DIR=/home/tomcat/XMLdata
+XML_DIR=/tmp
+DEST_DIR=/awsxml_shared/prod_b2c/XMLData
+DATE=`date +%y%m%d`
+
+sleep 5
+
+####Find folders older than 2 days and tar it####
+#find  $XML_DIR/*  -type d -ctime +0 -print > /tmp/xml-list.txt
+
+find  $XML_DIR/*  -type d -ctime +1 -print > /tmp/xml-list.txt
+
+cat /tmp/xml-list.txt | while read list
+do
+ tar -czf $XML_DIR/$list.tar.gz   $list
+echo $list
+done
+
+##Copy archive files from XML directory to Destnation
+cd  $XML_DIR | cp -r  *.gz   $DEST_DIR
+
+echo "Yesterday xml archives moved  to awsxml_shared"
+
+##Remove Tar files in XML directory once copying is done ######
+if [ "$?" = "0" ]; then
+        cd $XML_DIR
+
+                cat /tmp/xml-list.txt | while read list
+                do
+                        rm -rf $list.tar.gz
+                done
+
+        else
+                echo "Xml archive file not moved" 1>&2
+                exit 1
+fi
+##Remove xml compressed folder####
+for f in $(cat /tmp/xml-list.txt);
+do
+
+rm -rf "$f";
+"xml-backup.sh-bkp" 48L, 948C             
+
+
+rm -rf "$f";
+
+done
+
+echo "Job Completed Successfully"
+
