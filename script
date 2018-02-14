@@ -57,3 +57,43 @@ done
 
 echo "Job Completed Successfully"
 
+
+
+
+#!/bin/bash
+set -e
+XML_DIR=/home/tomcat/XMLdata
+DEST_DIR=/awsxml_shared/prod_b2c/XMLData
+PREFIX=`hostname`
+#DATE=`date +%y%m%d -d "yesterday"`
+DATE=`date +%y%m%d`
+TAR_FILE=${PREFIX}_${DATE}.tar
+
+YESTERDAY=`date +%y%m%d -d "yesterday"`
+YESTERDAY_TAR_FILE=${PREFIX}_${YESTERDAY}.tar
+mkdir -p $XML_DIR/$DATE
+cd $XML_DIR/$DATE
+echo " $(date +%c) ...executing the script as `whoami` on $PREFIX"
+echo " $(date +%c) ...starting taring xml files on $PREFIX..."
+tar cf ../$TAR_FILE .
+echo " $(date +%c) ...finished taring xml files on $PREFIX..."
+cd ..
+
+cp -rf $TAR_FILE ${DEST_DIR}
+echo " $(date +%c) ...$TAR_FILE file copied to ${DEST_DIR} on $PREFIX..."
+
+if [ -f "$YESTERDAY_TAR_FILE" ];
+then
+    rm $YESTERDAY_TAR_FILE
+    echo " $(date +%c) ...$YESTERDAY_TAR_FILE file removed on $PREFIX..."
+else
+    echo " $(date +%c) ...$YESTERDAY_TAR_FILE file does not exist on $PREFIX..."
+fi
+
+rm -rf $DATE
+echo " $(date +%c) ...$DATE removed on $PREFIX..."
+
+exit 0
+
+
+
