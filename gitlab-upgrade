@@ -1,0 +1,11 @@
+CentOS: Upgrading from manually downloaded Omnibus package
+To upgrade you will need to add the package repository to your system first. 
+
+Use the following:
+curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.rpm.sh | sudo bash
+If you are not comfortable installing the repository through a piped script, you can find the entire script here. 
+
+Now you will be able to install / upgrade GitLab to the latest version using the package repository. When running the command below, GitLab will detect a conflict and remove gitlab in favor of gitlab-ce. 
+
+To upgrade, run:
+sudo yum install gitlab-ce
