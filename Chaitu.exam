@@ -1,0 +1,40 @@
+How to disable ipv6.
+A. To disable ipv6, you have to open /etc/sysctl.conf using any text editor and insert the following lines at the end:
+
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+If ipv6 is still not disabled, then the problem is that sysctl.conf is still not activated.
+
+To solve this, open a terminal(Ctrl+Alt+T) and type the command,
+
+sudo sysctl -p
+You will see this in the terminal:
+
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+2. Create a user and add to sudo group.
+
+A. useradd -d /home/chaitu  
+
+ password   chaitu
+ 
+ usermod -G sudo chaitu
+ 
+ 3. Create a 1gb swap partation and mount it perminantly.
+ 
+ fallocate --length 2GiB /mnt/swapfile
+ chmod 600 /mnt/swapfile
+ mkswap /mnt/swapfile
+ swapon /mnt/swapfile
+  Afterwards, enable the swap file to be mounted at boot time. Edit the /etc/fstab file and add the following line in it.
+
+/mnt/swapfile swap swap defaults 0 0
+
+4.install apache, config virtual host print info.php
+.
+ Link : https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04
+ 
+ 
