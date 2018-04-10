@@ -8,6 +8,9 @@ ok
 Done AA???
 
 
+which question ur working?
+
+
 How to disable ipv6.
 A. To disable ipv6, you have to open /etc/sysctl.conf using any text editor and insert the following lines at the end:
 
