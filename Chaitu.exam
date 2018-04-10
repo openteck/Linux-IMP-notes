@@ -1,8 +1,7 @@
 How to disable ipv6.
 A. To disable ipv6, you have to open /etc/sysctl.conf using any text editor and insert the following lines at the end:
 
-net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
+
 net.ipv6.conf.lo.disable_ipv6 = 1
 If ipv6 is still not disabled, then the problem is that sysctl.conf is still not activated.
 
@@ -11,13 +10,11 @@ To solve this, open a terminal(Ctrl+Alt+T) and type the command,
 sudo sysctl -p
 You will see this in the terminal:
 
-net.ipv6.conf.all.disable_ipv6 = 1
-net.ipv6.conf.default.disable_ipv6 = 1
 net.ipv6.conf.lo.disable_ipv6 = 1
 
 2. Create a user and add to sudo group.
 
-A. useradd -d /home/chaitu  
+A. useradd -m -d /home/chaitu  
 
  password   chaitu
  
@@ -25,7 +22,7 @@ A. useradd -d /home/chaitu
  
  3. Create a 1gb swap partation and mount it perminantly.
  
- fallocate --length 2GiB /mnt/swapfile
+ fallocate -l 1G /mnt/swapfile
  chmod 600 /mnt/swapfile
  mkswap /mnt/swapfile
  swapon /mnt/swapfile
@@ -33,8 +30,96 @@ A. useradd -d /home/chaitu
 
 /mnt/swapfile swap swap defaults 0 0
 
+
+
 4.install apache, config virtual host print info.php
-.
+
+
+sudo apt-get install apache2
+
+root@ubuntu:~# /etc/init.d/apache2 stop
+ * Stopping web server apache2                                                                                                                                                                        *
+root@ubuntu:~# /etc/init.d/apache2 start
+ * Starting web server apache2                                                                                                                                                                       AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 127.0.1.1. Set the 'ServerName' directive globally to suppress this message
+ *
+root@ubuntu:~#
+
+root@ubuntu:~# netstat -nutlp
+
+apt-get install php5-cli
+
+
+
+
  Link : https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-16-04
  
  
+ 
+ 
+ 
+ 
+5 Set cron job to clear cache every 5 mins
+
+to clear cache belwo is the command
+echo 3 > /proc/sys/vm/drop_caches
+
+*/5 * * * *  echo 3 > /proc/sys/vm/drop_caches
+
+
+
+6. Install mysql server create a databse, and grant access to one user.
+
+
+sudo apt-get install mysql-server
+
+mysql -u root -p 
+
+pass: chaitu
+
+mysql> create database chaitudb;
+
+GRANT ALL PRIVILEGES ON  chaitudb. * TO 'krishna'@'localhost' IDENTIFIED BY 'krishna' ;
+
+
+History 
+
+
+434  service apache start
+  435  apt-get install apche2
+  436  apt-get install apache2
+  437  service apache start
+  438  netstat -nutlp
+  439  service apache stop
+  440  /etc/init.d/apache2 stop
+  441  /etc/init.d/apache2 start
+  442  ifconfig
+  443  cd /etc/apache2/sites-enabled/ls
+  444  cd  /etc/apache2/
+  445  ls
+  446  vim apache2.conf
+  447  cd sites-available/
+  448  ls
+  449  vim 000-default.conf
+  450  cd /var/www/html
+  451  ls
+  452  php -v
+  453  apt-get install php5-cli
+  454  php -v
+  455  vim info.php
+  456  ls
+  457  cat info.php
+  458  cd /etc/apache2/sites-enabled/
+  459  ls
+  460  vim 000-default.conf
+  461  cd -
+  462  ls -ltr
+  463  chown www-data:www-data info.php
+  464  chmod 777 info.php
+  465  tail -f /var/log/apache2/error.log
+  466  sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
+  467  dpkg -l | grep php
+  468  dpkg -l | grep libapache2-mod-php
+  469  apt-get install php5-mcrypt php5-mysql
+  470  service apache2 restart
+  471  apt-get install libapache2-mod-php
+  472  
