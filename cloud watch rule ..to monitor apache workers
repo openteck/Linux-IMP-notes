@@ -1,0 +1,29 @@
+ Apache Server Status for ec2-107-22-47-235.compute-1.amazonaws.com
+
+Server Version: Apache/2.2.23 (Unix) DAV/2 PHP/5.3.17
+Server Built: Oct 21 2012 20:35:32
+
+Current Time: Friday, 02-Nov-2012 11:02:13 UTC
+Restart Time: Friday, 02-Nov-2012 10:49:49 UTC
+Parent Server Generation: 0
+Server uptime: 12 minutes 23 seconds
+1 requests currently being processed, 7 idle workers
+
+_____W__........................................................
+................................................................
+................................................................
+................................................................
+
+Scoreboard Key:
+"_" Waiting for Connection, "S" Starting up, "R" Reading Request,
+"W" Sending Reply, "K" Keepalive (read), "D" DNS Lookup,
+"C" Closing connection, "L" Logging, "G" Gracefully finishing,
+"I" Idle cleanup of worker, "." Open slot with no current process
+PID Key:
+
+   1156 in state: _ ,   1158 in state: _ ,   1159 in state: _ 
+   1160 in state: _ ,   1161 in state: _ ,   1162 in state: W 
+   1163 in state: _ ,   1164 in state: _ ,
+
+To obtain a full report with current status information you need to use the ExtendedStatus On directive.
+Apache/2.2.23 (Amazon) Server at ec2-107-22-47-235.compute-1.amazonaws.com Port 80
