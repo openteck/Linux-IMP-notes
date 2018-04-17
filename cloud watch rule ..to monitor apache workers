@@ -27,3 +27,9 @@ PID Key:
 
 To obtain a full report with current status information you need to use the ExtendedStatus On directive.
 Apache/2.2.23 (Amazon) Server at ec2-107-22-47-235.compute-1.amazonaws.com Port 80
+
+
+
+
+
+Ref :- http://blog.domenech.org/2012/11/aws-cloudwatch-custom-metric-for-apache.html
